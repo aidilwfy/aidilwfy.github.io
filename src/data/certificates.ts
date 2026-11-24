@@ -1,29 +1,333 @@
-import type { Certificate } from "@/types";
+import type { Certificate, CertificateCategory } from "@/types";
 
 /**
  * ============================================================
- *  CERTIFICATES — shown in the "Certificates" tab of Awards
+ *  CERTIFICATES — shown in the "Certificates" section
  * ============================================================
- *  1. Put the image in /public/images/certificates/ (JPG or PNG)
- *  2. Set `image` to its path, e.g. "/images/certificates/gold-ivic.jpg"
- *  Entries without an image show a "coming soon" placeholder.
- *  Add or remove entries freely.
+ *  1. Put the image in /public/images/certificates/ (WebP, JPG or PNG)
+ *  2. Add an entry below with its category, image path and pixel size.
+ *  Categories: achievement (Pencapaian), appreciation (Penghargaan),
+ *              participation (Penyertaan), course (Kursus & Profesional).
+ *  Entries are shown in the order they appear inside each category.
  */
+
+const P = { width: 1044, height: 1400 }; // portrait scan
+const L = { width: 1400, height: 1044 }; // landscape scan
+const D = { width: 990, height: 1400 }; // digital certificate
+const img = (name: string) => `/images/certificates/${name}.webp`;
+
+export const certificateCategories: Record<
+  CertificateCategory,
+  { label: string; malay: string; description: string }
+> = {
+  achievement: {
+    label: "Achievements",
+    malay: "Pencapaian",
+    description: "Awards and placings from competitions, innovation events and exams.",
+  },
+  appreciation: {
+    label: "Appreciation",
+    malay: "Penghargaan",
+    description: "Recognition for serving on committees and contributing to official events.",
+  },
+  participation: {
+    label: "Participation",
+    malay: "Penyertaan",
+    description: "Workshops, competitions and programmes I have taken part in.",
+  },
+  course: {
+    label: "Courses",
+    malay: "Kursus",
+    description: "Online courses and professional learning.",
+  },
+};
+
 export const certificates: Certificate[] = [
+  /* ---------------- Pencapaian ---------------- */
   {
-    title: "Gold Award — Road to Khatam",
-    issuer: "International Vocational Innovative Competition (IVIC)",
-    image: "",
+    category: "achievement",
+    title: "Gold Award — Sistem Pemantauan Road to Khatam",
+    event: "International Vocational Innovative Competition (IVIC) 2026",
+    issuer: "KV Sungai Petani 2 · BPLTV, Ministry of Education",
+    result: "Gold Award",
+    date: "Aug – Oct 2026",
+    image: img("ivic-2026-gold"),
+    ...D,
   },
   {
-    title: "Bronze Award — SPARK",
-    issuer: "VISTA 2026",
-    year: "2026",
-    image: "",
+    category: "achievement",
+    title: "Four-Star Award — M-VELS",
+    event: "Horizon Baharu KIK · 2nd National MirikiKStart 2026",
+    issuer: "Kolej Vokasional Miri",
+    result: "Anugerah Empat Bintang",
+    date: "Aug – Oct 2026",
+    image: img("mvels-empat-bintang"),
+    ...D,
   },
   {
-    title: "Certificate in Database Management System and Web Application",
-    issuer: "Kolej Vokasional Kuala Selangor",
-    image: "",
+    category: "achievement",
+    title: "Runner-up — KVSkills 2024 (Web Technology)",
+    event: "Pertandingan KVSkills 2024, college level",
+    issuer: "Jabatan Teknologi Maklumat, KV Kuala Selangor",
+    result: "Naib Johan",
+    date: "15 Aug 2024",
+    image: img("kvskills-2024-naib-johan"),
+    ...P,
+  },
+  {
+    category: "achievement",
+    title: "Academic Excellence — SKM3 Examination 2025",
+    event: "Kecemerlangan di dalam Peperiksaan Tahun 2025",
+    issuer: "Surau Ar-Raudhah Seksyen 5, Kota Puteri",
+    result: "Excellence",
+    date: "2025",
+    image: img("skm3-2025-cemerlang"),
+    ...P,
+  },
+  {
+    category: "achievement",
+    title: "2nd Place — Creative Ramadan Video",
+    event: "Pertandingan Video Kreatif Ramadan",
+    issuer: "Jabatan Teknologi Maklumat, KV Kuala Selangor",
+    result: "Tempat Kedua",
+    image: img("video-kreatif-ramadan"),
+    ...P,
+  },
+  {
+    category: "achievement",
+    title: "Runner-up — Cultural Night, KASPA 2024",
+    event: "Kursus Kenaikan Pangkat Kadet Sekolah Pertahanan Awam (KASPA), district level",
+    issuer: "Pejabat Pendidikan Daerah Kuala Selangor",
+    result: "Naib Johan",
+    date: "3 – 5 Sep 2024",
+    image: img("kaspa-2024-naib-johan"),
+    ...P,
+  },
+  {
+    category: "achievement",
+    title: "3rd Place — 200 m Sprint",
+    event: "Kejohanan Olahraga KV Kuala Selangor 2025",
+    issuer: "KV Kuala Selangor",
+    result: "Tempat Ketiga",
+    date: "24 Oct 2025",
+    image: img("olahraga-2025-200m"),
+    ...P,
+  },
+  {
+    category: "achievement",
+    title: "5th Place — Copa KV de Futsal 2026",
+    event: "Kejohanan Copa KV de Futsal 2026",
+    issuer: "KV Kuala Selangor",
+    result: "Tempat Kelima",
+    date: "2026",
+    image: img("copa-kv-futsal-2026"),
+    ...P,
+  },
+  {
+    category: "achievement",
+    title: "Consolation Prize — Basic Art Watercolor",
+    event: "Animation Day 2026, secondary school category",
+    issuer: "Program Teknologi Animasi 3D, KV Kuala Selangor",
+    result: "Saguhati",
+    date: "15 Sep 2026",
+    image: img("watercolor-2026-saguhati"),
+    ...P,
+  },
+
+  /* ---------------- Penghargaan ---------------- */
+  {
+    category: "appreciation",
+    title: "Official Visit of the President of Brazil",
+    event: "Lawatan Rasmi TYT Luiz Inácio Lula da Silva ke Malaysia",
+    issuer: "Prime Minister's Office (Pejabat Perdana Menteri)",
+    result: "Contributor",
+    date: "25 Oct 2025",
+    image: img("pmo-lawatan-brazil-2025"),
+    ...P,
+  },
+  {
+    category: "appreciation",
+    title: "Official Visit of the President of South Africa",
+    event: "Lawatan Rasmi TYT Matamela Cyril Ramaphosa ke Malaysia",
+    issuer: "Prime Minister's Office (Pejabat Perdana Menteri)",
+    result: "Contributor",
+    date: "25 Oct 2025",
+    image: img("pmo-lawatan-afrika-selatan-2025"),
+    ...P,
+  },
+  {
+    category: "appreciation",
+    title: "Committee — Final Year Project Showcase",
+    event: "Jawatankuasa Final Year Project Showcase",
+    issuer: "KV Kuala Selangor",
+    result: "Committee",
+    date: "27 Feb 2026",
+    image: img("jk-fyp-showcase-2026"),
+    ...L,
+  },
+  {
+    category: "appreciation",
+    title: "Committee — SVM 2026 Student Intake Interviews",
+    event: "Jawatankuasa Temuduga Pengambilan Pelajar SVM 2026",
+    issuer: "KV Kuala Selangor",
+    result: "Committee",
+    date: "5 Dec 2025",
+    image: img("jk-temuduga-svm-2026"),
+    ...L,
+  },
+  {
+    category: "appreciation",
+    title: "Sales Committee — 10th KV Convocation Festival",
+    event: "Pesta Konvokesyen Kolej Vokasional Kali ke-10, USIM Nilai",
+    issuer: "KV Kuala Selangor",
+    result: "Committee",
+    date: "6 – 14 Apr 2026",
+    image: img("jk-konvokesyen-2026"),
+    ...L,
+  },
+  {
+    category: "appreciation",
+    title: "Photography Committee — Bubur Lambuk 2026",
+    event: "Program Memasak Bubur Lambuk 2026, Masjid Al-Awwabin",
+    issuer: "KV Kuala Selangor",
+    result: "Photographer",
+    date: "11 Mar 2026",
+    image: img("jk-bubur-lambuk-2026"),
+    ...L,
+  },
+  {
+    category: "appreciation",
+    title: "Checkpoint Officer — District Cross-Country",
+    event: "Kejohanan Merentas Desa MSS Daerah Kuala Selangor",
+    issuer: "Pejabat Pendidikan Daerah Kuala Selangor",
+    result: "Check Point L2",
+    date: "12 Feb 2026",
+    image: img("merentas-desa-mss-2026"),
+    ...P,
+  },
+
+  /* ---------------- Penyertaan ---------------- */
+  {
+    category: "participation",
+    title: "IVIC 2026 — Sistem Pemantauan Road to Khatam",
+    event: "International Vocational Innovative Competition 2026",
+    issuer: "KV Sungai Petani 2 · BPLTV, Ministry of Education",
+    result: "Participant",
+    date: "10 Aug – 13 Oct 2026",
+    image: img("ivic-2026-penyertaan"),
+    ...D,
+  },
+  {
+    category: "participation",
+    title: "Laravel Workshop & Web App Development Competition",
+    event: "Bengkel Asas Laravel dan Pertandingan Pembangunan Aplikasi Web",
+    issuer: "KV Kuala Selangor × Synchro Network",
+    result: "Participant",
+    date: "23 – 24 Jun 2026",
+    image: img("bengkel-laravel-2026"),
+    ...P,
+  },
+  {
+    category: "participation",
+    title: "Database Principles: From Fundamentals to Normalization",
+    event: "Database workshop",
+    issuer: "ASGB",
+    result: "Participant",
+    date: "21 – 22 Apr 2026",
+    image: img("asgb-database-2026"),
+    ...L,
+  },
+  {
+    category: "participation",
+    title: "Microsoft & Canva Basics Workshop",
+    event: "Bengkel Asas Microsoft dan Canva",
+    issuer: "Program Teknologi Sistem Pengurusan Pangkalan Data dan Aplikasi Web, KVKS",
+    result: "Participant",
+    date: "18 – 24 Oct 2023",
+    image: img("bengkel-microsoft-canva-2023"),
+    ...P,
+  },
+  {
+    category: "participation",
+    title: "KVKS Silver Jubilee Logo Design Competition",
+    event: "Pertandingan Mencipta Logo Sempena Sambutan Jubli Perak KVKS 2024",
+    issuer: "KV Kuala Selangor",
+    result: "Participant",
+    date: "26 Feb – 14 Mar 2024",
+    image: img("logo-jubli-perak-2024"),
+    ...P,
+  },
+  {
+    category: "participation",
+    title: "Creative Raya Card Competition",
+    event: "Pertandingan Kad Raya Kreatif",
+    issuer: "Jabatan Teknologi Maklumat, KV Kuala Selangor",
+    result: "Participant",
+    date: "10 Mar 2026",
+    image: img("kad-raya-kreatif-2026"),
+    ...P,
+  },
+  {
+    category: "participation",
+    title: "Basic Art Watercolor — Animation Day 2026",
+    event: "Pertandingan Basic Art – Watercolor",
+    issuer: "Program Teknologi Animasi 3D, KV Kuala Selangor",
+    result: "Participant",
+    date: "15 Sep 2026",
+    image: img("watercolor-2026-penyertaan"),
+    ...P,
+  },
+  {
+    category: "participation",
+    title: "E-Sport Competition",
+    event: "Pertandingan E-Sport",
+    issuer: "Majlis Perwakilan Pelajar × Kelab E-Sport KVKS",
+    result: "Participant",
+    date: "23 Aug 2025",
+    image: img("esport-2025"),
+    ...P,
+  },
+  {
+    category: "participation",
+    title: "KUSVOC Run 2026",
+    event: "KUSVOC Run 2026",
+    issuer: "Unit Sukan dan Kokurikulum, KV Kuala Selangor",
+    result: "Participant",
+    date: "30 Jan 2026",
+    image: img("kusvoc-run-2026"),
+    ...P,
+  },
+  {
+    category: "participation",
+    title: "4-Corner Football League 2024",
+    event: "Program Liga 4 Penjuru Bola Sepak 2024",
+    issuer: "Majlis Perwakilan Pelajar, KV Kuala Selangor",
+    result: "Participant",
+    date: "20 Jan 2024",
+    image: img("liga-4-penjuru-2024"),
+    ...P,
+  },
+  {
+    category: "participation",
+    title: "Rugby Championship — L12 Category",
+    event: "Kejohanan Ragbi Kategori L12, MSS Daerah Kuala Selangor",
+    issuer: "Pejabat Pendidikan Daerah Kuala Selangor",
+    result: "Participant",
+    date: "10 – 13 Jul 2023",
+    image: img("ragbi-l12-mss-2023"),
+    ...P,
+  },
+
+  /* ---------------- Kursus ---------------- */
+  {
+    category: "course",
+    title: "AI Fundamentals: Foundations for Understanding AI",
+    event: "IBM SkillsBuild digital credential",
+    issuer: "IBM SkillsBuild",
+    result: "Completed",
+    date: "4 Nov 2026",
+    image: img("ibm-ai-fundamentals"),
+    width: 1400,
+    height: 925,
   },
 ];

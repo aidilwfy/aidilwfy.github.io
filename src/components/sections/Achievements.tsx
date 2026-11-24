@@ -1,9 +1,31 @@
 "use client";
 
-import { Medal, Trophy } from "lucide-react";
+import { Medal, Star, Trophy } from "lucide-react";
 import { achievements } from "@/data/achievements";
+import type { Achievement } from "@/types";
 import { cn } from "@/lib/utils";
 import { Reveal, Section, SectionHeading } from "@/components/ui/Primitives";
+
+const styles: Record<Achievement["level"], { icon: typeof Trophy; border: string; badge: string; text: string }> = {
+  gold: {
+    icon: Trophy,
+    border: "border-l-gold",
+    badge: "bg-amber-50 text-amber-700 ring-amber-600/15",
+    text: "text-gold",
+  },
+  star: {
+    icon: Star,
+    border: "border-l-indigo-500",
+    badge: "bg-indigo-50 text-indigo-600 ring-indigo-600/15",
+    text: "text-indigo-600",
+  },
+  bronze: {
+    icon: Medal,
+    border: "border-l-bronze",
+    badge: "bg-orange-50 text-orange-700 ring-orange-600/15",
+    text: "text-bronze",
+  },
+};
 
 export function Achievements() {
   return (
@@ -15,25 +37,17 @@ export function Achievements() {
       />
 
       <Reveal>
-        <div className="grid gap-5 md:grid-cols-2">
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {achievements.map((a) => {
-            const gold = a.level === "gold";
-            const Icon = gold ? Trophy : Medal;
+            const s = styles[a.level];
+            const Icon = s.icon;
             return (
-              <article
-                key={a.competition}
-                className={cn("glass flex gap-4 rounded-2xl border-l-4 p-6", gold ? "border-l-gold" : "border-l-bronze")}
-              >
-                <span
-                  className={cn(
-                    "grid size-11 shrink-0 place-items-center rounded-xl ring-1",
-                    gold ? "bg-amber-50 text-amber-700 ring-amber-600/15" : "bg-orange-50 text-orange-700 ring-orange-600/15",
-                  )}
-                >
+              <article key={a.competition} className={cn("glass flex gap-4 rounded-2xl border-l-4 p-6", s.border)}>
+                <span className={cn("grid size-11 shrink-0 place-items-center rounded-xl ring-1", s.badge)}>
                   <Icon className="size-5" aria-hidden />
                 </span>
                 <div>
-                  <p className={cn("text-sm font-semibold", gold ? "text-gold" : "text-bronze")}>
+                  <p className={cn("text-sm font-semibold", s.text)}>
                     {a.award}
                     {a.year && <span className="font-normal text-subtle"> · {a.year}</span>}
                   </p>

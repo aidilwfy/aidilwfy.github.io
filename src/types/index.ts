@@ -35,12 +35,22 @@ export interface EducationEntry {
   image?: { src: string; alt: string; position?: string };
 }
 
+export type CertificateCategory = "achievement" | "appreciation" | "participation" | "course";
+
 export interface Certificate {
   title: string;
+  /** Event / programme name as written on the certificate */
+  event?: string;
   issuer: string;
-  year?: string;
-  /** Path inside /public, e.g. "/images/certificates/gold-ivic.jpg". "" = placeholder */
+  category: CertificateCategory;
+  /** Short result or role, e.g. "Gold Award", "Naib Johan", "Committee" */
+  result?: string;
+  /** Date as written on the certificate, e.g. "15 Aug 2024" */
+  date?: string;
+  /** Path inside /public, e.g. "/images/certificates/gold-ivic.webp" */
   image: string;
+  width: number;
+  height: number;
 }
 
 export interface JourneyMilestone {
@@ -122,7 +132,7 @@ export interface Project {
 /* ------------------------------------------------------------------ */
 
 export interface Achievement {
-  level: "gold" | "bronze";
+  level: "gold" | "bronze" | "star";
   award: string;
   competition: string;
   /** Only fill in when confirmed. */
