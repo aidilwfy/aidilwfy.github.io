@@ -2,7 +2,8 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 
 export function Modal({
   open,
@@ -18,6 +19,8 @@ export function Modal({
   wide?: boolean;
 }) {
   const panelRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   const lastFocused = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -54,11 +57,14 @@ export function Modal({
     };
   }, [open, onClose]);
 
-  return (
+  if (!mounted) return null;
+
+  // Portal to <body> so the dialog always sits above the navbar and fills the viewport
+  return createPortal(
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-[80] flex items-end justify-center sm:items-center sm:p-6"
+          className="fixed inset-0 z-[100] flex items-end justify-center sm:items-center sm:p-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -75,7 +81,7 @@ export function Modal({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.98 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className={`relative max-h-[92vh] w-full ${wide ? "max-w-4xl" : "max-w-3xl"} overflow-y-auto overscroll-contain glass-strong rounded-t-2xl outline-none sm:rounded-2xl`}
+            className={`relative max-h-[92dvh] w-full ${wide ? "max-w-4xl" : "max-w-3xl"} overflow-y-auto overscroll-contain glass-strong rounded-t-2xl outline-none sm:rounded-2xl`}
           >
             <button
               type="button"
@@ -89,6 +95,7 @@ export function Modal({
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body,
   );
 }

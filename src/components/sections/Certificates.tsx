@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Award,
   CalendarDays,
@@ -83,15 +83,16 @@ function CertificateCard({ cert, onOpen }: { cert: Certificate; onOpen: () => vo
       onClick={onOpen}
       aria-haspopup="dialog"
       aria-label={`View certificate: ${cert.title}`}
-      className="group glass flex h-full w-full cursor-zoom-in flex-col overflow-hidden rounded-2xl text-left transition-all duration-300 hover:-translate-y-1 hover:bg-white/80 hover:shadow-xl hover:shadow-blue-900/10"
+      className="group glass flex h-full w-full cursor-zoom-in flex-col overflow-hidden rounded-2xl text-left transition-[transform,box-shadow,background-color] duration-300 hover:-translate-y-1 hover:bg-white/80 hover:shadow-xl hover:shadow-blue-900/10"
     >
       <div className={cn("relative aspect-[5/4] bg-gradient-to-b to-white/40", t.glow)}>
         <div className="absolute inset-4 flex items-center justify-center">
           <Image
-            src={cert.image}
+            src={cert.image.replace(/\.webp$/, "-thumb.webp")}
             alt={`${cert.title} certificate`}
             width={cert.width}
             height={cert.height}
+            loading="lazy"
             sizes="(min-width: 1024px) 300px, (min-width: 640px) 45vw, 90vw"
             className="h-auto max-h-full w-auto max-w-full rounded-[3px] shadow-lg ring-1 shadow-slate-900/15 ring-slate-900/5 transition-transform duration-300 group-hover:scale-[1.03]"
           />
@@ -179,7 +180,7 @@ export function Certificates() {
     <section
       id="certificates"
       aria-labelledby="certificates-title"
-      className="border-y border-white/70 bg-gradient-to-b from-white/45 to-blue-50/40 py-14 backdrop-blur-sm md:py-16"
+      className="border-y border-white/70 bg-gradient-to-b from-white/45 to-blue-50/40 py-14 md:py-16"
     >
       <div className="mx-auto w-full max-w-5xl px-5 md:px-8">
         <div className="mb-8">
@@ -243,20 +244,16 @@ export function Certificates() {
         )}
 
         <ul id="certificate-grid" className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          <AnimatePresence mode="popLayout" initial={false}>
-            {visible.map((c, i) => (
-              <motion.li
-                key={c.image}
-                layout
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.97 }}
-                transition={{ duration: 0.25, delay: Math.min(i, 8) * 0.03 }}
-              >
-                <CertificateCard cert={c} onOpen={() => setOpenIndex(i)} />
-              </motion.li>
-            ))}
-          </AnimatePresence>
+          {visible.map((c, i) => (
+            <motion.li
+              key={`${filter}-${c.image}`}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.2, delay: (i % INITIAL) * 0.03 }}
+            >
+              <CertificateCard cert={c} onOpen={() => setOpenIndex(i)} />
+            </motion.li>
+          ))}
         </ul>
 
         {list.length > INITIAL && (
@@ -289,7 +286,7 @@ export function Certificates() {
                 width={open.width}
                 height={open.height}
                 sizes="(min-width: 896px) 860px, 95vw"
-                className="h-auto max-h-[68vh] w-auto max-w-full rounded shadow-xl ring-1 ring-slate-900/10"
+                className="h-auto max-h-[calc(92dvh-13rem)] w-auto max-w-full rounded shadow-xl ring-1 ring-slate-900/10"
               />
               {list.length > 1 && (
                 <>

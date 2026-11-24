@@ -48,16 +48,25 @@ html {
 body {
   color: var(--fg);
   background-color: var(--bg);
-  /* Soft blue light behind the glass panels */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Soft blue light behind the glass panels. A fixed layer is composited once,
+   unlike background-attachment: fixed which repaints on every scroll. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
   background-image:
     radial-gradient(55% 45% at 8% 0%, #cddff8 0%, transparent 70%),
     radial-gradient(45% 40% at 95% 20%, #d2ebf8 0%, transparent 70%),
     radial-gradient(40% 40% at 20% 75%, #d9e4fa 0%, transparent 70%),
     radial-gradient(50% 45% at 80% 100%, #d8e0f9 0%, transparent 70%);
-  background-attachment: fixed;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
+  transform: translateZ(0);
 }
 
 ::selection {
@@ -67,20 +76,16 @@ body {
 @layer components {
   /* Frosted glass panel — utilities (borders, radius, padding) can still override */
   .glass {
-    background: rgba(255, 255, 255, 0.55);
-    border: 1px solid rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.85);
     box-shadow:
       0 1px 2px rgba(30, 58, 110, 0.04),
       0 10px 30px -14px rgba(30, 58, 110, 0.18);
-    backdrop-filter: blur(16px) saturate(160%);
-    -webkit-backdrop-filter: blur(16px) saturate(160%);
   }
   .glass-strong {
-    background: rgba(255, 255, 255, 0.82);
     border: 1px solid rgba(255, 255, 255, 0.9);
     box-shadow: 0 20px 50px -20px rgba(30, 58, 110, 0.3);
-    backdrop-filter: blur(20px) saturate(160%);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    background: rgba(255, 255, 255, 0.94);
   }
 }
 
