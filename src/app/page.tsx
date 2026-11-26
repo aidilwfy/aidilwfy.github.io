@@ -1,7 +1,7 @@
 import { education, personal, site } from "@/data/personal";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { BackToTop, ScrollProgress } from "@/components/layout/ScrollUi";
+import { BackToTop } from "@/components/layout/ScrollUi";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
 import { Skills } from "@/components/sections/Skills";
@@ -27,7 +27,6 @@ export default function Home() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <ScrollProgress />
       <Navbar />
       <main id="main">
         <Hero />

@@ -220,6 +220,16 @@ export const certificates: Certificate[] = [
   /* ---------------- Penyertaan ---------------- */
   {
     category: "participation",
+    title: "Karnival Inovasi Pendidikan Madani 2026",
+    event: "Karnival Inovasi Pendidikan Madani Sektor Pembelajaran, Universiti Selangor (Bestari Jaya)",
+    issuer: "PPD Kuala Selangor × Universiti Selangor × Yayasan Menteri Besar Selangor",
+    result: "Participant",
+    date: "24 Nov 2026",
+    image: img("karnival-inovasi-madani-2026"),
+    ...D,
+  },
+  {
+    category: "participation",
     title: "IVIC 2026 — Sistem Pemantauan Road to Khatam",
     event: "International Vocational Innovative Competition 2026",
     issuer: "KV Sungai Petani 2 · BPLTV, Ministry of Education",

@@ -110,11 +110,6 @@ export function Hero() {
           >
             {hasPhoto ? (
               <div className="hero-float relative">
-                {/* Slowly rotating gradient ring behind the photo */}
-                <div
-                  aria-hidden
-                  className="hero-ring absolute -inset-3 rounded-[1.75rem] bg-[conic-gradient(from_0deg,#2563eb,#06b6d4,#a5b4fc,#2563eb)] opacity-45 blur-xl"
-                />
                 <div className="glass relative aspect-[3/4] overflow-hidden rounded-2xl">
                   <Image
                     src={personal.profileImage}

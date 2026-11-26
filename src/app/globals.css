@@ -94,18 +94,11 @@ body::before {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }
 }
-@keyframes spin-slow {
-  to { transform: rotate(360deg); }
-}
 @keyframes marquee {
   to { transform: translateX(-50%); }
 }
 .hero-float {
   animation: hero-float 6s ease-in-out infinite;
-  will-change: transform;
-}
-.hero-ring {
-  animation: spin-slow 14s linear infinite;
   will-change: transform;
 }
 .marquee-track {
@@ -121,7 +114,7 @@ body::before {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-float, .hero-ring, .marquee-track { animation: none !important; }
+  .hero-float, .marquee-track { animation: none !important; }
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
