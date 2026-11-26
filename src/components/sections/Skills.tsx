@@ -20,6 +20,8 @@ export function Skills() {
     .filter((s) => s.core)
     .sort((a, b) => coreOrder.indexOf(a.name) - coreOrder.indexOf(b.name));
 
+  const all = Array.from(new Set(skillCategories.flatMap((c) => c.skills.map((s) => s.name))));
+
   return (
     <Section id="skills" labelledBy="skills-title">
       <SectionHeading
@@ -50,6 +52,22 @@ export function Skills() {
           </ul>
         </div>
       </Reveal>
+
+      {/* Everything I use, scrolling past (pauses on hover) */}
+      <p className="sr-only">Technologies I use: {all.join(", ")}</p>
+      <div className="marquee mt-5 overflow-hidden py-1">
+        <ul className="marquee-track flex w-max gap-3" aria-hidden>
+          {[...all, ...all].map((name, i) => (
+            <li
+              key={`${name}-${i}`}
+              className="flex shrink-0 items-center gap-2 rounded-full bg-white/70 px-4 py-2 text-sm whitespace-nowrap text-fg/80 ring-1 ring-slate-900/5"
+            >
+              <TechLogo name={name} size={18} />
+              {name}
+            </li>
+          ))}
+        </ul>
+      </div>
 
       {/* Categories */}
       <div className="mt-5 grid gap-5 md:grid-cols-2">

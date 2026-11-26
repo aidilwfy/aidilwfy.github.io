@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
 import { ArrowUp } from "lucide-react";
 import { useEffect, useState } from "react";
 import { btn, cn, scrollToId } from "@/lib/utils";
@@ -29,5 +29,18 @@ export function BackToTop() {
         </motion.button>
       )}
     </AnimatePresence>
+  );
+}
+
+/** Thin gradient bar at the top that fills as you scroll (transform-only, cheap). */
+export function ScrollProgress() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 140, damping: 30, restDelta: 0.001 });
+  return (
+    <motion.div
+      aria-hidden
+      style={{ scaleX }}
+      className="fixed inset-x-0 top-0 z-[60] h-[3px] origin-left bg-gradient-to-r from-accent via-sky-500 to-accent-2"
+    />
   );
 }

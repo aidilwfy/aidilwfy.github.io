@@ -127,20 +127,3 @@ export interface Project {
   featured?: boolean;
 }
 
-/* ------------------------------------------------------------------ */
-/* Achievements                                                        */
-/* ------------------------------------------------------------------ */
-
-export interface Achievement {
-  level: "gold" | "silver" | "bronze" | "star";
-  award: string;
-  competition: string;
-  /** Only fill in when confirmed. */
-  year?: string;
-  project: string;
-  projectSlug?: string;
-  recognition: string;
-  description: string;
-  /** Path inside /public, e.g. "/images/achievements/gold.jpg". */
-  certificateImage?: string;
-}

@@ -20,7 +20,7 @@ import { certificateCategories, certificates } from "@/data/certificates";
 import type { Certificate, CertificateCategory } from "@/types";
 import { cn } from "@/lib/utils";
 import { Modal } from "@/components/ui/Modal";
-import { Reveal } from "@/components/ui/Primitives";
+import { CountUp, Reveal } from "@/components/ui/Primitives";
 
 type Filter = "all" | CertificateCategory;
 
@@ -186,7 +186,7 @@ export function Certificates() {
         <div className="mb-8">
           <p className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold text-accent">
             <Award className="size-3.5" aria-hidden />
-            {certificates.length} certificates
+            <CountUp to={certificates.length} /> certificates
           </p>
           <h2 id="certificates-title" className="text-2xl font-semibold tracking-tight md:text-3xl">
             Certificates
@@ -227,7 +227,7 @@ export function Certificates() {
                     <Icon className="size-5" aria-hidden />
                   </span>
                   <span className="min-w-0">
-                    <span className="block text-lg leading-none font-semibold tabular-nums">{f.count}</span>
+                    <CountUp to={f.count} className="block text-lg leading-none font-semibold tabular-nums" />
                     <span className="mt-1 block truncate text-xs font-medium text-muted">{f.malay}</span>
                   </span>
                 </button>

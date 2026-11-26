@@ -1,12 +1,11 @@
 import { education, personal, site } from "@/data/personal";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { BackToTop } from "@/components/layout/ScrollUi";
+import { BackToTop, ScrollProgress } from "@/components/layout/ScrollUi";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
 import { Skills } from "@/components/sections/Skills";
 import { Projects } from "@/components/sections/Projects";
-import { Achievements } from "@/components/sections/Achievements";
 import { Certificates } from "@/components/sections/Certificates";
 import { Contact } from "@/components/sections/Contact";
 
@@ -28,13 +27,13 @@ export default function Home() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <ScrollProgress />
       <Navbar />
       <main id="main">
         <Hero />
         <About />
         <Skills />
         <Projects />
-        <Achievements />
         <Certificates />
         <Contact />
       </main>

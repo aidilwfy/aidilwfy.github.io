@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
-import type { ReactNode } from "react";
+import { animate, motion, useInView } from "framer-motion";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 export function Reveal({ children, delay = 0, className }: { children: ReactNode; delay?: number; className?: string }) {
@@ -38,12 +38,26 @@ export function Section({
 
 export function SectionHeading({ id, title, description }: { id: string; title: ReactNode; description?: ReactNode }) {
   return (
-    <div className="mb-10">
+    <motion.div
+      className="mb-10"
+      initial={{ opacity: 0, x: -16 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+    >
       <h2 id={id} className="text-2xl font-semibold tracking-tight md:text-3xl">
         {title}
       </h2>
-      {description && <p className="mt-3 max-w-2xl leading-relaxed text-muted">{description}</p>}
-    </div>
+      <motion.span
+        aria-hidden
+        className="mt-3 block h-1 w-12 origin-left rounded-full bg-gradient-to-r from-accent to-accent-2"
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+      />
+      {description && <p className="mt-4 max-w-2xl leading-relaxed text-muted">{description}</p>}
+    </motion.div>
   );
 }
 
@@ -68,5 +82,23 @@ export function DevHint({ children, className }: { children: ReactNode; classNam
       <span className="font-semibold">Config · </span>
       {children}
     </p>
+  );
+}
+
+/** Number that counts up from 0 the first time it scrolls into view. */
+export function CountUp({ to, duration = 1.2, className }: { to: number; duration?: number; className?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-40px" });
+  const [value, setValue] = useState(to);
+  useEffect(() => {
+    if (!inView) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return setValue(to);
+    const controls = animate(0, to, { duration, ease: "easeOut", onUpdate: (v) => setValue(Math.round(v)) });
+    return () => controls.stop();
+  }, [inView, to, duration]);
+  return (
+    <span ref={ref} className={className}>
+      {value}
+    </span>
   );
 }
