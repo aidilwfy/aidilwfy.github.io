@@ -13,6 +13,12 @@ const styles: Record<Achievement["level"], { icon: typeof Trophy; border: string
     badge: "bg-amber-50 text-amber-700 ring-amber-600/15",
     text: "text-gold",
   },
+  silver: {
+    icon: Medal,
+    border: "border-l-slate-400",
+    badge: "bg-slate-100 text-slate-600 ring-slate-500/20",
+    text: "text-slate-600",
+  },
   star: {
     icon: Star,
     border: "border-l-indigo-500",
@@ -37,7 +43,7 @@ export function Achievements() {
       />
 
       <Reveal>
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-5 md:grid-cols-2">
           {achievements.map((a) => {
             const s = styles[a.level];
             const Icon = s.icon;

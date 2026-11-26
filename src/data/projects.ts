@@ -52,7 +52,7 @@ export const projects: Project[] = [
     significance:
       "Demonstrates my interest in solving real-world institutional management problems through technology and digital transformation.",
     status: { label: "Final Year Project · 2026 – 2027", tone: "progress" },
-    award: { level: "bronze", title: "Bronze Award · VISTA 2026" },
+    award: { level: "silver", title: "Silver · National TVET Innovation 2026 · Bronze · VISTA 2026" },
     mockup: {
       src: "/images/projects/spark-app.png",
       alt: "SPARK mobile app on two phones: the Google sign-in screen and the student home screen with weekly return slots",

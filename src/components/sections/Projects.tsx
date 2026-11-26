@@ -45,7 +45,11 @@ function AwardBadge({ award, className }: { award: NonNullable<Project["award"]>
     <span
       className={cn(
         "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium shadow-sm ring-1",
-        gold ? "bg-amber-50 text-amber-800 ring-amber-500/25" : "bg-orange-50 text-orange-800 ring-orange-500/25",
+        gold
+          ? "bg-amber-50 text-amber-800 ring-amber-500/25"
+          : award.level === "silver"
+            ? "bg-slate-100 text-slate-700 ring-slate-400/30"
+            : "bg-orange-50 text-orange-800 ring-orange-500/25",
         className,
       )}
     >

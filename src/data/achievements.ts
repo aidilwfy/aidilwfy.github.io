@@ -21,6 +21,18 @@ export const achievements: Achievement[] = [
     certificateImage: "/images/certificates/ivic-2026-gold.webp",
   },
   {
+    level: "silver",
+    award: "Silver Award",
+    competition: "National TVET Research Symposium & Innovation Competition 2026",
+    year: "2026",
+    project: "SPARK — Student Permission And Residence Keeping",
+    projectSlug: "spark",
+    recognition: "Silver Award in the innovation category, national level.",
+    description:
+      "Awarded by the Technical and Vocational Education and Training Division (BPLTV), Ministry of Education, in the national-level TVET innovation competition held online from July to October 2026.",
+    certificateImage: "/images/certificates/tvet-2026-perak.webp",
+  },
+  {
     level: "star",
     award: "Four-Star Award",
     competition: "Horizon Baharu KIK — 2nd National MirikiKStart 2026",

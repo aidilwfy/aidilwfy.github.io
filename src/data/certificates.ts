@@ -56,6 +56,17 @@ export const certificates: Certificate[] = [
   },
   {
     category: "achievement",
+    title: "Silver Award — SPARK",
+    event: "Simposium Penyelidikan dan Pertandingan Inovasi TVET Peringkat Kebangsaan 2026 · Innovation category (online)",
+    issuer: "BPLTV, Ministry of Education",
+    result: "Pingat Perak",
+    date: "Jul – Oct 2026",
+    image: img("tvet-2026-perak"),
+    width: 1125,
+    height: 797,
+  },
+  {
+    category: "achievement",
     title: "Four-Star Award — M-VELS",
     event: "Horizon Baharu KIK · 2nd National MirikiKStart 2026",
     issuer: "Kolej Vokasional Miri",

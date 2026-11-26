@@ -115,7 +115,7 @@ export interface Project {
   contribution?: string;
   significance: string;
   status: { label: string; tone: StatusTone };
-  award?: { level: "gold" | "bronze"; title: string };
+  award?: { level: "gold" | "silver" | "bronze"; title: string };
   /** Path inside /public, e.g. "/images/projects/spark.png". */
   thumbnail?: string;
   /** Tall promotional poster, shown beside the main project card and in its case study. */
@@ -132,7 +132,7 @@ export interface Project {
 /* ------------------------------------------------------------------ */
 
 export interface Achievement {
-  level: "gold" | "bronze" | "star";
+  level: "gold" | "silver" | "bronze" | "star";
   award: string;
   competition: string;
   /** Only fill in when confirmed. */
